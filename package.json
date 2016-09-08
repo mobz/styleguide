@@ -1,0 +1,28 @@
+{
+  "name": "styleguide",
+  "version": "0.0.1",
+  "description": "Aconex Core Styleguide",
+  "author": "ui@aconex.com",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.cloudengr.aconex.com/ui/styleguide.git"
+  },
+  "engine": {
+    "node": ">=6.3"
+  },
+  "dependencies": {
+    "aconex-ui": "git+ssh://git@git.aconex.com:aconex-ui",
+    "express": "4.14.x",
+    "express-handlebars": "3.0.x",
+    "findit2": "2.2.x",
+    "get-installed-path": "1.0.x",
+    "morgan": "1.7.x",
+    "nodemon": "1.10.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon"
+  }
+}
