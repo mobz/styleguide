@@ -24,5 +24,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "eslint-config-aconex": "^1.0.0"
   }
 }
