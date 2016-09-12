@@ -5,7 +5,7 @@ const viewEngine = require( 'express-handlebars' );
 const PORT = 3080;
 
 const app = express();
-const routeHandler = require( './routes/index.js' );
+const routeHandler = require( './routes' );
 
 app
 	.engine( 'handlebars', viewEngine( { defaultLayout: 'main' } ) )
