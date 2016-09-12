@@ -1,19 +1,40 @@
-const installPath = require("get-installed-path");
-const findit = require("findit2");
+const findit = require( 'findit2' );
+const fs = require( 'fs' );
+const installPath = require( 'get-installed-path' );
+const mdParser = require( '../mdParser/mdParser' );
 
-const STYLEGUIDE_DOC = /\.guide\.md$/;
+const STYLEGUIDE_DOCS = /\.guide\.md$/;
 
 module.exports = function( req, res ) {
-	const vm = {
-		files: []
+	let vm = {
+		files: [],
+		contents: null
 	};
-	const finder = findit( installPath('aconex-ui', true), { followSymlinks: true });
-	finder.on("file", function( file, stat ) {
-		if( STYLEGUIDE_DOC.test( file ) ) {
+	let finder = findit( installPath( 'aconex-ui', true ), { followSymlinks: true } );
+	let guideContents = null;
+
+	finder.on( 'file', ( file ) => {
+		buildNavigation( file );
+		buildContents( file );
+	} );
+
+	finder.on( 'end', () => {
+		res.render( 'index', vm );
+	} );
+
+	function buildNavigation( file ) {
+		if ( STYLEGUIDE_DOCS.test( file ) ) {
 			vm.files.push( file );
 		}
-	});
-	finder.on("end", () => {
-		res.render('index', vm);
-	});
+	}
+
+	function buildContents( file ) {
+		let guideDoc = `${req.params.id}.guide.md`;
+
+		if ( file.indexOf( guideDoc ) > -1 ) {
+			let contents = fs.readFileSync( file, 'utf8' );
+			guideContents = mdParser.render( contents );
+			vm.contents = guideContents;
+		}
+	}
 };
