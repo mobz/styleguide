@@ -18,11 +18,18 @@
     "express-handlebars": "3.0.x",
     "findit2": "2.2.x",
     "get-installed-path": "1.0.x",
+    "markdown-it": "^7.0.1",
     "morgan": "1.7.x",
     "nodemon": "1.10.x"
   },
   "main": "index.js",
   "scripts": {
-    "start": "nodemon"
+    "build": "node build.js",
+    "start": "nodemon",
+    "start-debug": "nodemon --inspect"
+  },
+  "devDependencies": {
+    "eslint": "^3.4.0",
+    "eslint-config-aconex": "^1.0.0"
   }
 }

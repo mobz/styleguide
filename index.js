@@ -1,15 +1,19 @@
 const express = require( 'express' );
-const viewEngine  = require('express-handlebars');
 const logger = require( 'morgan' );
+const viewEngine = require( 'express-handlebars' );
+
+const app = express();
+const pageHandler = require( './routes/page' );
+const demoHandler = require( './routes/demo' );
 
 const PORT = 3080;
 
-const app = express();
-
 app
-	.engine( 'handlebars', viewEngine({	defaultLayout: 'main' }) )
+	.engine( 'handlebars', viewEngine( { defaultLayout: 'main' } ) )
 	.set( 'view engine', 'handlebars' )
 	.use( logger( 'dev' ) )
-	.use( "/static", express.static( __dirname + '/static' ) )
-	.use( "/", require( './routes/index.js' ) )
-	.listen( PORT, () => console.log( "styleguide running at http://localhost:" + PORT ) );
+	.use( '/static', express.static( __dirname + '/static' ) )
+	.use( '/components/:id', pageHandler )
+	.use( '/basics/:id', pageHandler )
+	.use( '/demo', demoHandler )
+	.listen( PORT, () => console.log( 'styleguide running at http://localhost:' + PORT ) ); // eslint-disable-line no-console
