@@ -1,8 +1,7 @@
 const findit = require( 'findit2' );
 const installPath = require( 'get-installed-path' );
 const mdParser = require( '../services/markdown-parser' );
-
-const STYLEGUIDE_DOCS = /\.guide\.md$/;
+const constants = require( '../constants' );
 
 module.exports = function( req, res ) {
 	let vm = {
@@ -21,13 +20,13 @@ module.exports = function( req, res ) {
 	} );
 
 	function buildNavigation( filePath ) {
-		if ( STYLEGUIDE_DOCS.test( filePath ) ) {
+		if ( constants.GUIDE_EXTENSION_REGEX.test( filePath ) ) {
 			vm.files.push( filePath );
 		}
 	}
 
 	function buildContents( filePath ) {
-		let guideDoc = `${req.params.id}.guide.md`;
+		let guideDoc = req.params.id + constants.GUIDE_EXTENSION;
 
 		if ( filePath.indexOf( guideDoc ) > -1 ) {
 			vm.contents = mdParser.render( filePath );
