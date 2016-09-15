@@ -1,8 +1,16 @@
 <h1>Navigation</h1>
 <div>
-	<ul>{{#each files}}
-		<li>{{this}}</li>
-		{{/each}}</ul>
+	<ul>
+		{{#each categories}}
+			<li>{{@key}}
+				{{#each this}}
+					<ul>
+						<li><a href="{{url}}">{{name}}</a></li>
+					</ul>
+				{{/each}}
+			</li>
+		{{/each}}
+	</ul>
 </div>
 <h1>Contents</h1>
 <div>{{{contents}}}</div>
