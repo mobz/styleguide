@@ -8,6 +8,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
 </head>
 
-<body>{{{body}}}</body>
+<body>
+	{{{body}}}
+	<script>
+		function onIframeLoad(iframe) {
+			iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+		}
+	</script>
+</body>
 
 </html>

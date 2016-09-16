@@ -1,8 +1,7 @@
 const fs = require( 'fs' );
 const handlebars = require( 'handlebars' );
-const installPath = require( 'get-installed-path' );
 
-const template = `<iframe src="{{src}}" style="height: 200px; width: 100%"></iframe>`;
+const template = fs.readFileSync( 'views/demo-iframe.handlebars', 'utf8' );
 
 module.exports = {
 	getIframeContainer: ( demoFilePath ) => {

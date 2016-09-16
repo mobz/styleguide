@@ -24,9 +24,10 @@ module.exports = function( req, res ) {
 	function buildNavigation( filePath ) {
 		if ( constants.GUIDE_EXTENSION_REGEX.test( filePath ) ) {
 			let parts = filePath.split( path.sep );
+
+			let name = parts.pop().replace( constants.GUIDE_EXTENSION, '' );
 			parts.pop();
 
-			let name = parts.pop();
 			let category = parts.pop();
 			let url = `/${category}/${name}`;
 

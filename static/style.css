@@ -45,3 +45,8 @@ body {
 .styleguide-nav li {
 	text-transform: capitalize;
 }
+
+.styleguide-demoContainer {
+	border: none;
+	width: 100%;
+}
