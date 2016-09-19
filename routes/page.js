@@ -33,7 +33,9 @@ module.exports = function( req, res ) {
 
 			vm.categories[ category ] = vm.categories[ category ] || [];
 
-			vm.categories[ category ].push( { name, url } );
+			let active = req.params.id === name;
+
+			vm.categories[ category ].push( { name, url, active } );
 			vm.categories[ category ].sort( sorter );
 		}
 	}

@@ -11,6 +11,36 @@ html {
 
 body {
 	font-family: sans-serif;
+	font-size: 0.9rem;
+	color: #454545;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: normal;
+}
+
+h1:first-child {
+	margin-top: 0;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #666;
+	margin: 0 0 0.5rem 0;
+}
+
+blockquote {
+	color: #666;
+	font-size: 1rem;
+	margin: 24px 0;
 }
 
 .styleguide-page {
@@ -19,34 +49,112 @@ body {
 	overflow: hidden;
 }
 
-.styleguide-content,
 .styleguide-sidebar {
-	padding: 0 40px;
-}
-
-.styleguide-sidebar {
+	color: #777;
 	position: absolute;
-	width: 220px;
+	width: 280px;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	overflow-y: auto;
+	box-shadow: 1px 0 8px #969696;
+	z-index: 1;
+}
+
+.styleguide-brand {
+	border-bottom: 1px solid #ddd;
+	font-size: 0.9rem;
+	padding: 16px 0;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+.styleguide-brand > img {
+	float: left;
+	width: 24px;
+	margin-right: 16px;
+}
+
+.styleguide-brand,
+.styleguide-nav {
+	padding-left: 32px;
+	padding-right: 32px;
+}
+
+.styleguide-nav {
+	margin: 0;
+	padding-top: 24px;
+	padding-bottom: 24px;
+	list-style: none;
+}
+
+.styleguide-nav a {
+	text-decoration: none;
+	color: #777;
+	display: block;
+	padding: 4px 16px;
+}
+
+.styleguide-nav a.active,
+.styleguide-nav a:hover {
+	color: #fe7d18;
+}
+
+.styleguide-nav li {
+	text-transform: capitalize;
+	list-style: none;
+}
+
+.styleguide-nav > li {
+	font-size: 1.1rem;
+	margin-bottom: 16px;
+}
+
+.styleguide-nav > li > ul {
+	margin: 8px 0 0;
+	padding: 0;
+}
+
+.styleguide-nav > li > ul > li {
+	font-size: 0.9rem;
 }
 
 .styleguide-content {
+	background: #ececec;
+	padding: 12px 32px;
 	position: absolute;
 	top: 0;
-	left: 220px;
+	left: 280px;
 	right: 0;
 	bottom: 0;
 	overflow-y: auto;
 }
 
-.styleguide-nav li {
-	text-transform: capitalize;
+.styleguide-demo {
+	padding: 8px 0 16px 0;
 }
 
-.styleguide-demoContainer {
+.styleguide-demoTabs {
+	display: flex;
+	font-size: 0.8rem;
+}
+
+.styleguide-demoTabs > div {
+	color: #969696;
+	padding: 8px 24px;
+}
+
+.styleguide-demoTabs > div.active {
+	background: white;
+	color: #454545;
+}
+
+.styleguide-demoContents {
+	background: white;
+	padding: 16px 8px;
+}
+
+.styleguide-demoContents > iframe {
 	border: none;
 	width: 100%;
 }
