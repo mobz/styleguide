@@ -1,7 +1,52 @@
-*, *:after *:before {
+*,
+*:after,
+*:before {
 	box-sizing: border-box;
 }
 
-BODY {
+body,
+html {
+	height: 100%;
+}
+
+body {
 	font-family: sans-serif;
+}
+
+.styleguide-page {
+	position: relative;
+	height: 100%;
+	overflow: hidden;
+}
+
+.styleguide-content,
+.styleguide-sidebar {
+	padding: 0 40px;
+}
+
+.styleguide-sidebar {
+	position: absolute;
+	width: 220px;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	overflow-y: auto;
+}
+
+.styleguide-content {
+	position: absolute;
+	top: 0;
+	left: 220px;
+	right: 0;
+	bottom: 0;
+	overflow-y: auto;
+}
+
+.styleguide-nav li {
+	text-transform: capitalize;
+}
+
+.styleguide-demoContainer {
+	border: none;
+	width: 100%;
 }

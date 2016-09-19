@@ -1,8 +1,18 @@
-<h1>Navigation</h1>
-<div>
-	<ul>{{#each files}}
-		<li>{{this}}</li>
-		{{/each}}</ul>
+<div class="styleguide-page">
+	<div class="styleguide-sidebar">
+		<ul class="styleguide-nav">
+			{{#each categories}}
+			<li>{{@key}}
+				{{#each this}}
+				<ul>
+					<li><a href="{{url}}">{{name}}</a></li>
+				</ul>
+				{{/each}}
+			</li>
+			{{/each}}
+		</ul>
+	</div>
+	<div class="styleguide-content">
+		<div>{{{contents}}}</div>
+	</div>
 </div>
-<h1>Contents</h1>
-<div>{{{contents}}}</div>
