@@ -46,6 +46,10 @@ module.exports = function( req, res ) {
 		if ( filePath.indexOf( guideDoc ) > -1 ) {
 			vm.contents = mdParser.render( filePath );
 		}
+
+		if ( !vm.contents ) {
+			vm.contents = mdParser.render( 'index.guide.md' );
+		}
 	}
 
 	function sorter( a, b ) {
