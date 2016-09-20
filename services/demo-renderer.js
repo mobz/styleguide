@@ -1,13 +1,14 @@
 const fs = require( 'fs' );
 const handlebars = require( 'handlebars' );
+const path = require( 'path' );
 
 const template = fs.readFileSync( 'views/demo-iframe.handlebars', 'utf8' );
 
 module.exports = {
 	getIframeContainer: ( demoFilePath ) => {
-		demoFilePath = encodeURIComponent( demoFilePath );
-		let src = `/demo?file=${demoFilePath}`;
-		let vm = { src };
+		let name = path.basename( demoFilePath );
+		let src = `/demo?file=${encodeURIComponent( demoFilePath )}`;
+		let vm = { name, src };
 
 		return handlebars.compile( template )( vm );
 	},
