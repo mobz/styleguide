@@ -18,6 +18,9 @@ module.exports = function( req, res ) {
 	} );
 
 	finder.on( 'end', () => {
+		if ( !vm.contents ) {
+			vm.contents = mdParser.render( 'index.guide.md' );
+		}
 		res.render( 'index', vm );
 	} );
 

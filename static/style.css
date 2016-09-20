@@ -26,6 +26,7 @@ h6 {
 
 h1:first-child {
 	margin-top: 0;
+	text-transform: capitalize;
 }
 
 h2,
@@ -67,6 +68,11 @@ blockquote {
 	padding: 16px 0;
 	font-weight: bold;
 	line-height: 24px;
+}
+
+.styleguide-brand > a {
+	color: #454545;
+	text-decoration: none;
 }
 
 .styleguide-brand > img {
