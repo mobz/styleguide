@@ -1,14 +1,22 @@
 <div class="styleguide-page">
 	<div class="styleguide-sidebar">
+		<div class="styleguide-brand">
+			<img src="/static/aconex-logo.png">
+			<span>Aconex Pattern Library</span>
+		</div>
 		<ul class="styleguide-nav">
 			{{#each categories}}
-			<li>{{@key}}
-				{{#each this}}
-				<ul>
-					<li><a href="{{url}}">{{name}}</a></li>
-				</ul>
-				{{/each}}
-			</li>
+				<li>{{@key}}
+					<ul>
+						{{#each this}}
+							{{#if active}}
+								<li><a class="{{#if active}}active{{/if}}">{{name}}</a></li>
+							{{else}}
+								<li><a href="{{url}}">{{name}}</a></li>
+							{{/if}}
+						{{/each}}
+					</ul>
+				</li>
 			{{/each}}
 		</ul>
 	</div>
