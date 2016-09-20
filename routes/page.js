@@ -18,6 +18,9 @@ module.exports = function( req, res ) {
 	} );
 
 	finder.on( 'end', () => {
+		if ( !vm.contents ) {
+			vm.contents = mdParser.render( 'index.guide.md' );
+		}
 		res.render( 'index', vm );
 	} );
 
@@ -45,10 +48,6 @@ module.exports = function( req, res ) {
 
 		if ( filePath.indexOf( guideDoc ) > -1 ) {
 			vm.contents = mdParser.render( filePath );
-		}
-
-		if ( !vm.contents ) {
-			vm.contents = mdParser.render( 'index.guide.md' );
 		}
 	}
 
