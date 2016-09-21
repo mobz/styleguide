@@ -160,7 +160,7 @@ blockquote {
 .styleguide-demoContents {
 	display: none;
 	background: white;
-	padding: 16px 8px;
+	padding: 16px;
 }
 
 .styleguide-demoContents.active {
@@ -170,4 +170,9 @@ blockquote {
 .styleguide-demoContents > iframe {
 	border: none;
 	width: 100%;
+}
+
+.styleguide-demoCode {
+	margin: 0;
+	font-size: 0.8rem;
 }

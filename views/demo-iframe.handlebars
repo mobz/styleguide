@@ -4,10 +4,9 @@
 		<a data-tab-toggle onclick="styleguide.showTab(this, 'code')">Code</a>
 	</div>
 	<div class="styleguide-demoContents active" data-tab-id="example">
-		<iframe name="{{name}}" src="{{src}}" onload="styleguide.onIframeLoad(this)"></iframe>
+		<iframe name="{{iframeName}}" src="{{iframeSrc}}" onload="styleguide.onIframeLoad(this)"></iframe>
 	</div>
 	<div class="styleguide-demoContents" data-tab-id="code">
-		<!-- <pre>{{code}}</pre> -->
-		<img src="http://i.imgur.com/6CbxaPc.jpg">
+		<pre class="styleguide-demoCode">{{code}}</pre>
 	</div>
 </div>

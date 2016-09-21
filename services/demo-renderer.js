@@ -5,10 +5,11 @@ const path = require( 'path' );
 const template = fs.readFileSync( 'views/demo-iframe.handlebars', 'utf8' );
 
 module.exports = {
-	getIframeContainer: ( demoFilePath ) => {
-		let name = path.basename( demoFilePath );
-		let src = `/demo?file=${encodeURIComponent( demoFilePath )}`;
-		let vm = { name, src };
+	getDemoContainer: ( demoFilePath ) => {
+		let iframeName = path.basename( demoFilePath );
+		let iframeSrc = `/demo?file=${encodeURIComponent( demoFilePath )}`;
+		let code = fs.readFileSync( demoFilePath, 'utf8' );
+		let vm = { iframeName, iframeSrc, code };
 
 		return handlebars.compile( template )( vm );
 	},
