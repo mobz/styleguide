@@ -152,6 +152,10 @@ blockquote {
 	padding: 8px 24px;
 }
 
+.styleguide-demoTabs > a:not(:first-child) {
+	text-transform: uppercase;
+}
+
 .styleguide-demoTabs > a.active {
 	background: white;
 	color: #454545;
