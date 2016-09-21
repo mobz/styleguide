@@ -1,10 +1,13 @@
 <div class="styleguide-demo">
 	<div class="styleguide-demoTabs">
-		<div class="active">Example</div>
-		<div>HTML</div>
-		<div>CSS</div>
+		<a data-tab-toggle onclick="styleguide.showTab(this, 'example')" class="active">Example</a>
+		<a data-tab-toggle onclick="styleguide.showTab(this, 'code')">Code</a>
 	</div>
-	<div class="styleguide-demoContents">
-		<iframe name="{{name}}" src="{{src}}" onload="onIframeLoad(this)"></iframe>
+	<div class="styleguide-demoContents active" data-tab-id="example">
+		<iframe name="{{name}}" src="{{src}}" onload="styleguide.onIframeLoad(this)"></iframe>
+	</div>
+	<div class="styleguide-demoContents" data-tab-id="code">
+		<!-- <pre>{{code}}</pre> -->
+		<img src="http://i.imgur.com/6CbxaPc.jpg">
 	</div>
 </div>
