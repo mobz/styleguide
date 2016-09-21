@@ -6,6 +6,7 @@ const mdParser = require( '../services/markdown-parser' );
 const constants = require( '../constants' );
 
 module.exports = function( req, res ) {
+	let defaultFile;
 	let vm = {
 		categories: {},
 		contents: null
@@ -18,13 +19,18 @@ module.exports = function( req, res ) {
 	} );
 
 	finder.on( 'end', () => {
-		if ( !vm.contents ) {
-			vm.contents = mdParser.render( 'index.guide.md' );
+		if ( !vm.contents && defaultFile ) {
+			vm.contents = mdParser.render( defaultFile );
 		}
 		res.render( 'index', vm );
 	} );
 
 	function buildNavigation( filePath ) {
+		if ( path.basename( filePath ) === constants.GUIDE_DEFAULT ) {
+			defaultFile = filePath;
+			return;
+		}
+
 		if ( constants.GUIDE_EXTENSION_REGEX.test( filePath ) ) {
 			let parts = filePath.split( path.sep );
 
