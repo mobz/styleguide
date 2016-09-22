@@ -1,10 +1,16 @@
 <div class="styleguide-demo">
 	<div class="styleguide-demoTabs">
-		<div class="active">Example</div>
-		<div>HTML</div>
-		<div>CSS</div>
+		<a data-tab-toggle onclick="styleguide.showTab(this, 'example')" class="active">Example</a>
+		{{#each tabs}}
+			<a data-tab-toggle onclick="styleguide.showTab(this, '{{id}}')">{{id}}</a>
+		{{/each}}
 	</div>
-	<div class="styleguide-demoContents">
-		<iframe name="{{name}}" src="{{src}}" onload="onIframeLoad(this)"></iframe>
+	<div class="styleguide-demoContents active" data-tab-id="example">
+		<iframe name="{{iframeName}}" src="{{iframeSrc}}" onload="styleguide.onIframeLoad(this)"></iframe>
 	</div>
+	{{#each tabs}}
+		<div class="styleguide-demoContents" data-tab-id="{{id}}">
+			<pre class="styleguide-demoCode prettyprint">{{contents}}</pre>
+		</div>
+	{{/each}}
 </div>

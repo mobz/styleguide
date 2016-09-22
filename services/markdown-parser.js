@@ -43,7 +43,7 @@ function plugin( md ) {
 	md.renderer.rules[ RULE_KEY ] = ( tokens, idx /* , options, env, renderer*/ ) => {
 		let demoFileName = tokens[ idx ].content;
 		let demoFilePath = path.join( folderPath, demoFileName + '.html' );
-		return demoRenderer.getIframeContainer( demoFilePath );
+		return demoRenderer.getDemoContainer( demoFilePath );
 	};
 }
 

@@ -145,22 +145,43 @@ blockquote {
 	font-size: 0.8rem;
 }
 
-.styleguide-demoTabs > div {
+.styleguide-demoTabs > a {
+	display: block;
+	cursor: pointer;
 	color: #969696;
 	padding: 8px 24px;
 }
 
-.styleguide-demoTabs > div.active {
+.styleguide-demoTabs > a:not(:first-child) {
+	text-transform: uppercase;
+}
+
+.styleguide-demoTabs > a.active {
 	background: white;
 	color: #454545;
 }
 
 .styleguide-demoContents {
+	display: none;
 	background: white;
-	padding: 16px 8px;
+	padding: 16px;
+}
+
+.styleguide-demoContents.active {
+	display: block;
 }
 
 .styleguide-demoContents > iframe {
 	border: none;
 	width: 100%;
+}
+
+.styleguide-demoCode {
+	margin: 0;
+	font-size: 0.8rem;
+}
+
+pre.styleguide-demoCode.prettyprint {
+	border: none;
+	padding: 0;
 }

@@ -14,19 +14,20 @@
   },
   "dependencies": {
     "aconex-ui": "git+ssh://git@git.aconex.com:aconex-ui",
+    "cheerio": "0.22.x",
     "express": "4.14.x",
     "express-handlebars": "3.0.x",
     "findit2": "2.2.x",
     "get-installed-path": "1.0.x",
-    "markdown-it": "^7.0.1",
+    "markdown-it": "7.0.x",
     "morgan": "1.7.x",
     "nodemon": "1.10.x"
   },
   "main": "index.js",
   "scripts": {
     "build": "node build.js",
-    "start": "nodemon",
-    "start-debug": "nodemon --inspect"
+    "start": "nodemon --ext js,handlebars",
+    "start-debug": "nodemon --ext js,handlebars --inspect"
   },
   "devDependencies": {
     "eslint": "^3.4.0",
