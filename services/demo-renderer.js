@@ -17,9 +17,10 @@ module.exports = {
 
 		let tabs = [];
 
-		$( SECTION_SELECTOR ).map( ( idx, item ) => {
+		$( SECTION_SELECTOR ).each( ( idx, item ) => {
 			let id = $( item ).attr( SECTION_ATTR );
-			let contents = $( item ).html();
+			// replace tabs with spaces as tab indentations look huge in the browser
+			let contents = $( item ).html().replace( /\t/g, '  ' );
 			tabs.push( { id, contents } );
 		} );
 
