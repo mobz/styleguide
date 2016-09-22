@@ -180,3 +180,8 @@ blockquote {
 	margin: 0;
 	font-size: 0.8rem;
 }
+
+pre.styleguide-demoCode.prettyprint {
+	border: none;
+	padding: 0;
+}
