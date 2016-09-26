@@ -6,9 +6,9 @@
 		</div>
 		<ul class="styleguide-nav">
 			{{#each categories}}
-				<li>{{@key}}
+				<li>{{name}}
 					<ul>
-						{{#each this}}
+						{{#each items}}
 							{{#if active}}
 								<li><a class="{{#if active}}active{{/if}}">{{name}}</a></li>
 							{{else}}

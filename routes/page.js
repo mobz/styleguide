@@ -6,12 +6,13 @@ const mdParser = require( '../services/markdown-parser' );
 const constants = require( '../constants' );
 
 module.exports = function( req, res ) {
-	let defaultFile;
+	let finder = findit( installPath( 'aconex-ui', true ), { followSymlinks: true } );
 	let vm = {
-		categories: {},
+		categories: [],
 		contents: null
 	};
-	let finder = findit( installPath( 'aconex-ui', true ), { followSymlinks: true } );
+	let defaultFile;
+	let categories = {};
 
 	finder.on( 'file', ( filePath ) => {
 		buildNavigation( filePath );
@@ -19,9 +20,8 @@ module.exports = function( req, res ) {
 	} );
 
 	finder.on( 'end', () => {
-		if ( !vm.contents && defaultFile ) {
-			vm.contents = mdParser.render( defaultFile );
-		}
+		setDefaultContents( vm );
+		sortNavigation( vm );
 		res.render( 'index', vm );
 	} );
 
@@ -40,12 +40,11 @@ module.exports = function( req, res ) {
 			let category = parts.pop();
 			let url = `/${category}/${name}`;
 
-			vm.categories[ category ] = vm.categories[ category ] || [];
+			categories[ category ] = categories[ category ] || [];
 
 			let active = req.params.id === name;
 
-			vm.categories[ category ].push( { name, url, active } );
-			vm.categories[ category ].sort( sorter );
+			categories[ category ].push( { name, url, active } );
 		}
 	}
 
@@ -55,6 +54,24 @@ module.exports = function( req, res ) {
 		if ( filePath.indexOf( guideDoc ) > -1 ) {
 			vm.contents = mdParser.render( filePath );
 		}
+	}
+
+	function setDefaultContents( vm ) {
+		if ( !vm.contents && defaultFile ) {
+			vm.contents = mdParser.render( defaultFile );
+		}
+	}
+
+	function sortNavigation( vm ) {
+		vm.categories = Object.keys( categories ).map( key => {
+			return {
+				name: key,
+				items: categories[ key ]
+			};
+		} );
+
+		vm.categories.sort( sorter );
+		vm.categories.forEach( category => category.items.sort( sorter ) );
 	}
 
 	function sorter( a, b ) {
