@@ -45,7 +45,6 @@ module.exports = function( req, res ) {
 			let active = req.params.id === name;
 
 			categories[ category ].push( { name, url, active } );
-			// categories[ category ].sort( sorter );
 		}
 	}
 
