@@ -15,6 +15,7 @@ app
 	.use( '/static', express.static( __dirname + '/static' ) )
 	.use( '/components/:id', pageHandler )
 	.use( '/basics/:id', pageHandler )
+	.use( '/docs/:id', pageHandler )
 	.use( '/demo', demoHandler )
 	.use( '/', pageHandler )
 	.listen( PORT, () => console.log( 'styleguide running at http://localhost:' + PORT ) ); // eslint-disable-line no-console

@@ -49,6 +49,7 @@ module.exports = function( req, res ) {
 	}
 
 	function buildContents( filePath ) {
+		if ( !req.params.id ) return;
 		let guideDoc = req.params.id + constants.GUIDE_EXTENSION;
 
 		if ( filePath.indexOf( guideDoc ) > -1 ) {
@@ -75,6 +76,10 @@ module.exports = function( req, res ) {
 	}
 
 	function sorter( a, b ) {
+		// docs section goes first
+		if ( a.name === 'docs' ) { return -1; }
+		if ( b.name === 'docs' ) { return 1; }
+
 		if ( a.name < b.name ) { return -1; }
 		if ( a.name > b.name ) { return 1; }
 		return 0;
