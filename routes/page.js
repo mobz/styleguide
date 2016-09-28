@@ -38,7 +38,7 @@ module.exports = function( req, res ) {
 			parts.pop();
 
 			let category = parts.pop();
-			let url = `/${category}/${name}`;
+			let url = `/styleguide/${category}/${name}`;
 
 			categories[ category ] = categories[ category ] || [];
 
@@ -49,10 +49,14 @@ module.exports = function( req, res ) {
 	}
 
 	function buildContents( filePath ) {
-		if ( !req.params.id ) return;
-		let guideDoc = req.params.id + constants.GUIDE_EXTENSION;
+		if ( !req.params.category || !req.params.id ) return;
 
-		if ( filePath.indexOf( guideDoc ) > -1 ) {
+		let category = req.params.category;
+		let id = req.params.id;
+		let guideDoc = `${id}${constants.GUIDE_EXTENSION}`;
+		let found = `${category}${path.sep}${id}${path.sep}${guideDoc}`;
+
+		if ( filePath.indexOf( found ) > -1 ) {
 			vm.contents = mdParser.render( filePath );
 		}
 	}
