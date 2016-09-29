@@ -7,6 +7,9 @@ var styleguide = { // eslint-disable-line no-unused-vars
 		var tabs = context.querySelectorAll( '[data-tab-toggle]' );
 		var tabContents = context.querySelectorAll( '[data-tab-id]' );
 
+		tabs = Array.prototype.slice.call( tabs, 0 );
+		tabContents = Array.prototype.slice.call( tabContents, 0 );
+
 		tabs.forEach( function( t ) {
 			t.classList.remove( 'active' );
 		} );
