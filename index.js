@@ -6,7 +6,8 @@ const app = express();
 const pageHandler = require( './routes/page' );
 const demoHandler = require( './routes/demo' );
 
-const PORT = 3080;
+const PORT = process.env.NODE_PORT || 3080;
+const IP = process.env.NODE_IP || 'localhost';
 
 app
 	.engine( 'handlebars', viewEngine( { defaultLayout: 'main' } ) )
@@ -17,4 +18,4 @@ app
 	.use( '/basics/:id', pageHandler )
 	.use( '/demo', demoHandler )
 	.use( '/', pageHandler )
-	.listen( PORT, () => console.log( 'styleguide running at http://localhost:' + PORT ) ); // eslint-disable-line no-console
+	.listen( PORT, IP, () => process.stdout.write( `styleguide running at http:\/\/${IP}:${PORT}\n` ) );

@@ -1,12 +1,27 @@
+const fs = require( 'fs' );
+const path = require( 'path' );
+
 const findit = require( 'findit2' );
 const installPath = require( 'get-installed-path' );
-const path = require( 'path' );
 
 const mdParser = require( '../services/markdown-parser' );
 const constants = require( '../constants' );
 
+const UI_LIBRARY = constants.UI_LIBRARY;
+
+let libraryPath;
+
+fs.stat( UI_LIBRARY, function( err, stat ) {
+	if( err ) {
+		libraryPath = installPath( UI_LIBRARY, true )
+	} else {
+		libraryPath = UI_LIBRARY;
+	}
+	console.log( `using ui library at ${libraryPath}` );
+});
+
 module.exports = function( req, res ) {
-	let finder = findit( installPath( 'aconex-ui', true ), { followSymlinks: true } );
+	let finder = findit( libraryPath, { followSymlinks: true } );
 	let vm = {
 		categories: [],
 		contents: null

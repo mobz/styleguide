@@ -26,11 +26,14 @@
   "main": "index.js",
   "scripts": {
     "build": "node build.js",
-    "start": "nodemon --ext js,handlebars",
+    "publish:prod": "node publish.js --app sg1",
+    "start": "node index.js",
     "start-debug": "nodemon --ext js,handlebars --inspect"
   },
   "devDependencies": {
-    "eslint": "^3.4.0",
-    "eslint-config-aconex": "^1.0.0"
+    "bluebird": "3.4.x",
+    "eslint": "3.4.x",
+    "eslint-config-aconex": "1.0.x",
+    "fs-extra": "0.30.x"
   }
 }
