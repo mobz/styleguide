@@ -11,3 +11,7 @@ npm start
 ```
 
 Then browse to [`http://localhost:3080`](http://localhost:3080) in your browser to view the styleguide.
+
+## Contributing
+
+Please see <https://git.cloudengr.aconex.com/ui/styleguide/blob/master/CONTRIBUTING.md>.
