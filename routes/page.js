@@ -53,7 +53,7 @@ module.exports = function( req, res ) {
 			parts.pop();
 
 			let category = parts.pop();
-			let url = `/${category}/${name}`;
+			let url = `/styleguide/${category}/${name}`;
 
 			categories[ category ] = categories[ category ] || [];
 
@@ -64,9 +64,14 @@ module.exports = function( req, res ) {
 	}
 
 	function buildContents( filePath ) {
-		let guideDoc = req.params.id + constants.GUIDE_EXTENSION;
+		if ( !req.params.category || !req.params.id ) return;
 
-		if ( filePath.indexOf( guideDoc ) > -1 ) {
+		let category = req.params.category;
+		let id = req.params.id;
+		let guideDoc = `${id}${constants.GUIDE_EXTENSION}`;
+		let found = `${category}${path.sep}${id}${path.sep}${guideDoc}`;
+
+		if ( filePath.indexOf( found ) > -1 ) {
 			vm.contents = mdParser.render( filePath );
 		}
 	}
@@ -90,6 +95,10 @@ module.exports = function( req, res ) {
 	}
 
 	function sorter( a, b ) {
+		// docs section goes first
+		if ( a.name === 'docs' ) { return -1; }
+		if ( b.name === 'docs' ) { return 1; }
+
 		if ( a.name < b.name ) { return -1; }
 		if ( a.name > b.name ) { return 1; }
 		return 0;
