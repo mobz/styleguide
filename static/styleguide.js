@@ -1,6 +1,8 @@
 var styleguide = { // eslint-disable-line no-unused-vars
 	onIframeLoad: function( iframe ) {
-		iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+		setTimeout( function() {
+			iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+		}, 10 );
 	},
 	showTab: function( tabEl, id ) {
 		var context = tabEl.parentElement.parentElement;

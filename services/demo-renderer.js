@@ -3,7 +3,7 @@ const fs = require( 'fs' );
 const handlebars = require( 'handlebars' );
 const path = require( 'path' );
 
-const TEMPLATE = fs.readFileSync( 'views/demo-iframe.handlebars', 'utf8' );
+const TEMPLATE = fs.readFileSync( 'views/demo-iframe-container.handlebars', 'utf8' );
 const SECTION_ATTR = 'styleguide-content';
 const SECTION_SELECTOR = `[${SECTION_ATTR}]`;
 
@@ -29,6 +29,7 @@ module.exports = {
 	},
 	getIframeContents: ( demoFilePath ) => {
 		let contents = fs.readFileSync( demoFilePath, 'utf8' );
-		return contents;
+		let isAngular = path.dirname( demoFilePath ).split( path.sep ).pop() === 'angular';
+		return { contents, isAngular };
 	}
 };

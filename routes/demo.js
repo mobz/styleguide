@@ -2,7 +2,11 @@ const demoRenderer = require( '../services/demo-renderer' );
 
 module.exports = function( req, res ) {
 	let demoFilePath = req.query.file;
-	let contents = demoRenderer.getIframeContents( demoFilePath );
-	let vm = { contents, layout: false };
-	res.render( 'demo-iframe-angular', vm );
+	let iframe = demoRenderer.getIframeContents( demoFilePath );
+	let vm = {
+		layout: false,
+		contents: iframe.contents,
+		isAngular: iframe.isAngular
+	};
+	res.render( 'demo-iframe-contents', vm );
 };
