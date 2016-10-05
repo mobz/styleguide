@@ -11,14 +11,16 @@ const UI_LIBRARY = constants.UI_LIBRARY;
 
 let libraryPath;
 
-fs.stat( UI_LIBRARY, function( err, stat ) {
-	if( err ) {
-		libraryPath = installPath( UI_LIBRARY, true )
+fs.stat( UI_LIBRARY, function( err ) {
+	if ( err ) {
+		libraryPath = installPath( UI_LIBRARY, true );
 	} else {
 		libraryPath = UI_LIBRARY;
 	}
+
+	// eslint-disable-next-line no-console
 	console.log( `using ui library at ${libraryPath}` );
-});
+} );
 
 module.exports = function( req, res ) {
 	let finder = findit( libraryPath, { followSymlinks: true } );
@@ -49,17 +51,17 @@ module.exports = function( req, res ) {
 		if ( constants.GUIDE_EXTENSION_REGEX.test( filePath ) ) {
 			let parts = filePath.split( path.sep );
 
-			let name = parts.pop().replace( constants.GUIDE_EXTENSION, '' );
+			let id = parts.pop().replace( constants.GUIDE_EXTENSION, '' );
 			parts.pop();
 
 			let category = parts.pop();
-			let url = `/styleguide/${category}/${name}`;
+			let url = `/styleguide/${category}/${id}`;
 
 			categories[ category ] = categories[ category ] || [];
 
-			let active = req.params.id === name;
+			let active = req.params.id === id;
 
-			categories[ category ].push( { name, url, active } );
+			categories[ category ].push( { id, url, active } );
 		}
 	}
 
@@ -85,7 +87,7 @@ module.exports = function( req, res ) {
 	function sortNavigation( vm ) {
 		vm.categories = Object.keys( categories ).map( key => {
 			return {
-				name: key,
+				id: key,
 				items: categories[ key ]
 			};
 		} );
@@ -96,11 +98,11 @@ module.exports = function( req, res ) {
 
 	function sorter( a, b ) {
 		// docs section goes first
-		if ( a.name === 'docs' ) { return -1; }
-		if ( b.name === 'docs' ) { return 1; }
+		if ( a.id === 'docs' ) { return -1; }
+		if ( b.id === 'docs' ) { return 1; }
 
-		if ( a.name < b.name ) { return -1; }
-		if ( a.name > b.name ) { return 1; }
+		if ( a.id < b.id ) { return -1; }
+		if ( a.id > b.id ) { return 1; }
 		return 0;
 	}
 };

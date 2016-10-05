@@ -6,13 +6,13 @@
 		</div>
 		<ul class="styleguide-nav">
 			{{#each categories}}
-				<li>{{name}}
+				<li>{{id}}
 					<ul>
 						{{#each items}}
 							{{#if active}}
-								<li><a class="{{#if active}}active{{/if}}">{{name}}</a></li>
+								<li><a class="{{#if active}}active{{/if}}">{{id}}</a></li>
 							{{else}}
-								<li><a href="{{url}}">{{name}}</a></li>
+								<li><a href="{{url}}">{{id}}</a></li>
 							{{/if}}
 						{{/each}}
 					</ul>
