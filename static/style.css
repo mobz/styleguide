@@ -7,11 +7,11 @@
 body,
 html {
 	height: 100%;
-	line-height: 1.4;
+	line-height: 1.6;
 }
 
 body {
-	font-family: arial, sans-serif;
+	font-family: helvetica, arial, sans-serif;
 	font-size: 0.9rem;
 	color: #454545;
 }
@@ -35,14 +35,26 @@ h3,
 h4,
 h5,
 h6 {
-	color: #666;
-	margin: 0 0 0.5rem;
+	color: #333;
+	margin: 0 0 8px 0;
+}
+
+h3,
+h4,
+h5,
+h6 {
+	color: #888;
 }
 
 blockquote {
 	color: #666;
-	font-size: 1rem;
+	font-size: 16px;
 	margin: 24px 0;
+	font-weight: lighter;
+}
+
+p {
+	margin: 0 0 16px;
 }
 
 code {
@@ -59,6 +71,7 @@ code {
 }
 
 .styleguide-sidebar {
+	background: #f1f1f1;
 	color: #777;
 	position: absolute;
 	width: 280px;
@@ -66,7 +79,7 @@ code {
 	left: 0;
 	bottom: 0;
 	overflow-y: auto;
-	box-shadow: 1px 0 8px #969696;
+	border-right: 1px solid #ddd;
 	z-index: 1;
 }
 
@@ -134,7 +147,6 @@ code {
 }
 
 .styleguide-content {
-	background: #ececec;
 	padding: 12px 32px;
 	position: absolute;
 	top: 0;
@@ -149,7 +161,7 @@ code {
 }
 
 .styleguide-demo {
-	padding: 8px 0 16px;
+	padding: 0px 0 16px;
 }
 
 .styleguide-demoTabs {
@@ -161,7 +173,7 @@ code {
 	display: block;
 	cursor: pointer;
 	color: #969696;
-	padding: 8px 24px;
+	padding: 0px 24px 8px 0;
 }
 
 .styleguide-demoTabs > a:not(:first-child) {
@@ -169,14 +181,15 @@ code {
 }
 
 .styleguide-demoTabs > a.active {
-	background: white;
 	color: #454545;
+	font-weight: bold;
 }
 
 .styleguide-demoContents {
 	display: none;
-	background: white;
-	padding: 16px;
+	padding: 24px;
+	border: 1px solid #ddd;
+	border-left: 4px solid #ddd;
 }
 
 .styleguide-demoContents.active {
