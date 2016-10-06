@@ -1,11 +1,11 @@
+const findit = require( 'findit2' );
 const fs = require( 'fs' );
+const installPath = require( 'get-installed-path' );
 const path = require( 'path' );
 
-const findit = require( 'findit2' );
-const installPath = require( 'get-installed-path' );
-
-const mdParser = require( '../services/markdown-parser' );
 const constants = require( '../constants' );
+const mdParser = require( '../services/markdown-parser' );
+const uiLibraryPath = require( '../services/ui-library-path' );
 
 const UI_LIBRARY = constants.UI_LIBRARY;
 
@@ -13,9 +13,9 @@ let libraryPath;
 
 fs.stat( UI_LIBRARY, function( err ) {
 	if ( err ) {
-		libraryPath = installPath( UI_LIBRARY, true );
+		uiLibraryPath( installPath( UI_LIBRARY, true ) );
 	} else {
-		libraryPath = UI_LIBRARY;
+		uiLibraryPath( UI_LIBRARY );
 	}
 
 	// eslint-disable-next-line no-console
@@ -23,7 +23,7 @@ fs.stat( UI_LIBRARY, function( err ) {
 } );
 
 module.exports = function( req, res ) {
-	let finder = findit( libraryPath, { followSymlinks: true } );
+	let finder = findit( uiLibraryPath(), { followSymlinks: true } );
 	let vm = {
 		categories: [],
 		contents: null
