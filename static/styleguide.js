@@ -1,11 +1,12 @@
 /* eslint-env browser */
-// eslint-disable-next-line no-unused-vars
-var styleguide = {
-	onIframeRendered: function() {
+window.styleguide = {
+	onIframeRendered: function( targetWin ) {
 		var iframes = document.querySelectorAll( 'iframe' );
 		setTimeout( function() {
 			iframes.forEach( function( iframe ) {
-				iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+				if ( iframe.contentWindow === targetWin ) {
+					iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+				}
 			} );
 		} );
 	},
