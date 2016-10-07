@@ -1,8 +1,13 @@
-var styleguide = { // eslint-disable-line no-unused-vars
-	onIframeLoad: function( iframe ) {
+/* eslint-env browser */
+// eslint-disable-next-line no-unused-vars
+var styleguide = {
+	onIframeRendered: function() {
+		var iframes = document.querySelectorAll( 'iframe' );
 		setTimeout( function() {
-			iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
-		}, 10 );
+			iframes.forEach( function( iframe ) {
+				iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+			} );
+		} );
 	},
 	showTab: function( tabEl, id ) {
 		var context = tabEl.parentElement.parentElement;
