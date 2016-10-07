@@ -1,27 +1,29 @@
+const findit = require( 'findit2' );
 const fs = require( 'fs' );
+const installPath = require( 'get-installed-path' );
 const path = require( 'path' );
 
-const findit = require( 'findit2' );
-const installPath = require( 'get-installed-path' );
-
-const mdParser = require( '../services/markdown-parser' );
 const constants = require( '../constants' );
+const mdParser = require( '../services/markdown-parser' );
+const uiLibraryPath = require( '../services/ui-library-path' );
 
 const UI_LIBRARY = constants.UI_LIBRARY;
 
 let libraryPath;
 
-fs.stat( UI_LIBRARY, function( err, stat ) {
-	if( err ) {
-		libraryPath = installPath( UI_LIBRARY, true )
+fs.stat( UI_LIBRARY, function( err ) {
+	if ( err ) {
+		uiLibraryPath( installPath( UI_LIBRARY, true ) );
 	} else {
-		libraryPath = UI_LIBRARY;
+		uiLibraryPath( UI_LIBRARY );
 	}
+
+	// eslint-disable-next-line no-console
 	console.log( `using ui library at ${libraryPath}` );
-});
+} );
 
 module.exports = function( req, res ) {
-	let finder = findit( libraryPath, { followSymlinks: true } );
+	let finder = findit( uiLibraryPath(), { followSymlinks: true } );
 	let vm = {
 		categories: [],
 		contents: null
@@ -49,24 +51,29 @@ module.exports = function( req, res ) {
 		if ( constants.GUIDE_EXTENSION_REGEX.test( filePath ) ) {
 			let parts = filePath.split( path.sep );
 
-			let name = parts.pop().replace( constants.GUIDE_EXTENSION, '' );
+			let id = parts.pop().replace( constants.GUIDE_EXTENSION, '' );
 			parts.pop();
 
 			let category = parts.pop();
-			let url = `/${category}/${name}`;
+			let url = `/styleguide/${category}/${id}`;
 
 			categories[ category ] = categories[ category ] || [];
 
-			let active = req.params.id === name;
+			let active = req.params.id === id;
 
-			categories[ category ].push( { name, url, active } );
+			categories[ category ].push( { id, url, active } );
 		}
 	}
 
 	function buildContents( filePath ) {
-		let guideDoc = req.params.id + constants.GUIDE_EXTENSION;
+		if ( !req.params.category || !req.params.id ) return;
 
-		if ( filePath.indexOf( guideDoc ) > -1 ) {
+		let category = req.params.category;
+		let id = req.params.id;
+		let guideDoc = `${id}${constants.GUIDE_EXTENSION}`;
+		let found = `${category}${path.sep}${id}${path.sep}${guideDoc}`;
+
+		if ( filePath.indexOf( found ) > -1 ) {
 			vm.contents = mdParser.render( filePath );
 		}
 	}
@@ -80,7 +87,7 @@ module.exports = function( req, res ) {
 	function sortNavigation( vm ) {
 		vm.categories = Object.keys( categories ).map( key => {
 			return {
-				name: key,
+				id: key,
 				items: categories[ key ]
 			};
 		} );
@@ -90,8 +97,12 @@ module.exports = function( req, res ) {
 	}
 
 	function sorter( a, b ) {
-		if ( a.name < b.name ) { return -1; }
-		if ( a.name > b.name ) { return 1; }
+		// docs section goes first
+		if ( a.id === 'docs' ) { return -1; }
+		if ( b.id === 'docs' ) { return 1; }
+
+		if ( a.id < b.id ) { return -1; }
+		if ( a.id > b.id ) { return 1; }
 		return 0;
 	}
 };

@@ -1,11 +1,22 @@
-var styleguide = { // eslint-disable-line no-unused-vars
-	onIframeLoad: function( iframe ) {
-		iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+/* eslint-env browser */
+window.styleguide = {
+	onIframeRendered: function( targetWin ) {
+		var iframes = document.querySelectorAll( 'iframe' );
+		setTimeout( function() {
+			iframes.forEach( function( iframe ) {
+				if ( iframe.contentWindow === targetWin ) {
+					iframe.style.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+				}
+			} );
+		} );
 	},
 	showTab: function( tabEl, id ) {
 		var context = tabEl.parentElement.parentElement;
 		var tabs = context.querySelectorAll( '[data-tab-toggle]' );
 		var tabContents = context.querySelectorAll( '[data-tab-id]' );
+
+		tabs = Array.prototype.slice.call( tabs, 0 );
+		tabContents = Array.prototype.slice.call( tabContents, 0 );
 
 		tabs.forEach( function( t ) {
 			t.classList.remove( 'active' );

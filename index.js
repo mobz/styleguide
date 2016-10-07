@@ -14,8 +14,7 @@ app
 	.set( 'view engine', 'handlebars' )
 	.use( logger( 'dev' ) )
 	.use( '/static', express.static( __dirname + '/static' ) )
-	.use( '/components/:id', pageHandler )
-	.use( '/basics/:id', pageHandler )
+	.use( '/styleguide/:category/:id', pageHandler )
 	.use( '/demo', demoHandler )
 	.use( '/', pageHandler )
 	.listen( PORT, IP, () => process.stdout.write( `styleguide running at http:\/\/${IP}:${PORT}\n` ) );
