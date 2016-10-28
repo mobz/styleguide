@@ -9,6 +9,13 @@
     "type": "git",
     "url": "ssh://git@git.cloudengr.aconex.com/ui/styleguide.git"
   },
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.js",
+    "publish:prod": "node publish.js --app sg1",
+    "start": "node index.js",
+    "start-debug": "nodemon --ext js,handlebars --inspect"
+  },
   "engine": {
     "node": ">=6.3"
   },
@@ -22,13 +29,6 @@
     "markdown-it": "7.0.x",
     "morgan": "1.7.x",
     "nodemon": "1.10.x"
-  },
-  "main": "index.js",
-  "scripts": {
-    "build": "node build.js",
-    "publish:prod": "node publish.js --app sg1",
-    "start": "node index.js",
-    "start-debug": "nodemon --ext js,handlebars --inspect"
   },
   "devDependencies": {
     "bluebird": "3.4.x",
