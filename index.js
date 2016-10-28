@@ -7,7 +7,7 @@ const pageHandler = require( './routes/page' );
 const demoHandler = require( './routes/demo' );
 
 const PORT = process.env.NODE_PORT || 3080;
-const IP = process.env.NODE_IP || 'localhost';
+const IP = process.env.NODE_IP || '0.0.0.0';
 
 app
 	.engine( 'handlebars', viewEngine( { defaultLayout: 'main' } ) )
