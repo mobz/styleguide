@@ -21,7 +21,7 @@ const builderAsync = bluebird.promisify( require( path.join( UI_LIBRARY, 'build'
 const copyDirs = [ 'constants', 'routes', 'services', 'static', 'views', 'index.js' ];
 const UILIB_COPY_OPTS = {
 	dereference: true,
-	filter: ( file ) => ! /aconex-ui.*node_modules/.test(file)
+	filter: ( file ) => ! /aconex-ui\/(node_modules|\.git)/.test(file)
 }
 
 
