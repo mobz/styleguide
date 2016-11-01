@@ -16,11 +16,11 @@ module.exports = {
 		let iframeName = path.basename( demoFilePath );
 		let iframeSrc = `/demo?file=${encodeURIComponent( src )}`;
 
-		let code
+		let code;
 		try {
 			code = fs.readFileSync( demoFilePath, 'utf8' );
-		} catch(e) {
-			code = "could not read ${demoFilePath}";
+		} catch( e ) {
+			code = 'could not read ${demoFilePath}';
 		}
 		let $ = cheerio.load( code );
 
