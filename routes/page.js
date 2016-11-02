@@ -9,8 +9,6 @@ const uiLibraryPath = require( '../services/ui-library-path' );
 
 const UI_LIBRARY = constants.UI_LIBRARY;
 
-let libraryPath;
-
 fs.stat( UI_LIBRARY, function( err ) {
 	if ( err ) {
 		uiLibraryPath( installPath( UI_LIBRARY, true ) );
@@ -19,7 +17,7 @@ fs.stat( UI_LIBRARY, function( err ) {
 	}
 
 	// eslint-disable-next-line no-console
-	console.log( `using ui library at ${libraryPath}` );
+	console.log( `using ui library at ${uiLibraryPath()}` );
 } );
 
 module.exports = function( req, res ) {
