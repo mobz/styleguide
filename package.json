@@ -11,10 +11,11 @@
   },
   "main": "index.js",
   "scripts": {
+    "dev": "npm run start | node build.dev.js",
     "build": "node build.js",
     "publish:prod": "node publish.js --app sg1",
     "start": "node index.js",
-    "start-debug": "nodemon --ext js,handlebars --inspect",
+    "start:debug": "nodemon --ext js,handlebars --inspect",
     "test": "npm run test:lint:js",
     "test:lint:js": "eslint \"services/*.js\" \"routes/*.js\" --cache"
   },
