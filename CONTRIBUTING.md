@@ -31,9 +31,10 @@ cd ../aconex-ui
 npm link
 cd ../styleguide
 npm link aconex-ui
+npm run dev
 ```
 
-At this point the styleguide will use your development version of aconex-ui instead of the latest master.
+At this point the styleguide will use your development version of aconex-ui instead of the latest master. Your local changes to aconex-ui can be seen by refreshing the styleguide in the browser.
 
 # Contributing to the styleguide
 
