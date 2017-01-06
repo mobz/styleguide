@@ -1,6 +1,7 @@
 const fs = require( 'fs' );
 const path = require( 'path' );
 const md = require( 'markdown-it' )();
+const tocAndAnchorPlugin = require( 'markdown-it-toc-and-anchor' ).default;
 const demoRenderer = require( './demo-renderer' );
 
 // the custom syntax is --$ demoFileName $--
@@ -38,7 +39,7 @@ function tokenise( state ) {
 	return true;
 }
 
-function plugin( md ) {
+function demoRendererPlugin( md ) {
 	md.inline.ruler.push( RULE_KEY, tokenise );
 	md.renderer.rules[ RULE_KEY ] = ( tokens, idx /* , options, env, renderer*/ ) => {
 		let demoFileName = tokens[ idx ].content;
@@ -47,7 +48,13 @@ function plugin( md ) {
 	};
 }
 
-md.use( plugin );
+md.use( demoRendererPlugin );
+md.use( tocAndAnchorPlugin, {
+	tocFirstLevel: 2,
+	tocClassName: 'styleguide-toc',
+	anchorLinkBefore: false,
+	anchorClassName: 'styleguide-tocAnchor'
+} );
 
 module.exports = {
 	render: ( filePath ) => {
