@@ -36,7 +36,7 @@ h4,
 h5,
 h6 {
 	color: #333;
-	margin: 0 0 8px 0;
+	margin: 0 0 8px;
 }
 
 h3,
@@ -160,8 +160,26 @@ code {
 	max-width: 100%;
 }
 
+.styleguide-toc {
+	margin: 0;
+}
+
+.styleguide-tocAnchor {
+	display: none;
+	text-decoration: none;
+	color: gray;
+}
+
+h2:hover .styleguide-tocAnchor,
+h3:hover .styleguide-tocAnchor,
+h4:hover .styleguide-tocAnchor,
+h5:hover .styleguide-tocAnchor,
+h6:hover .styleguide-tocAnchor {
+	display: inline-block;
+}
+
 .styleguide-demo {
-	padding: 0px 0 16px;
+	padding: 0 0 16px;
 }
 
 .styleguide-demoTabs {
@@ -173,7 +191,7 @@ code {
 	display: block;
 	cursor: pointer;
 	color: #969696;
-	padding: 0px 24px 8px 0;
+	padding: 0 24px 8px 0;
 }
 
 .styleguide-demoTabs > a:not(:first-child) {
