@@ -162,7 +162,66 @@ code {
 
 .styleguide-toc {
 	margin: 0;
+    position: fixed;
+    right: 0;
+    top: 0px;
+    width: 260px;
+    background: #f1f1f1;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    padding: 0;
 }
+
+.styleguide-toc li {
+	display: none;
+	padding: 0px;
+}
+
+.styleguide-toc > li:first-child > a {
+	margin-top: 8px;
+}
+
+.styleguide-toc > li:last-child > a {
+	margin-bottom: 8px;
+}
+
+.styleguide-toc:hover li {
+	display: block;
+}
+
+.styleguide-toc li a {
+	display: block;
+	color: #777;
+	text-decoration: none;
+	padding: 4px 16px 4px 16px;
+}
+
+.styleguide-toc li a:hover {
+	color: #fe7d18;
+}
+
+.styleguide-toc:hover li ul {
+	padding-left: 24px;
+}
+
+.styleguide-toc:before {
+	content: "Table of Contents";
+	font-weight: bold;
+	display: block;
+	border-bottom: 1px solid #ccc;
+	padding: 8px 16px;
+}
+
+.styleguide-toc:after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 8px;
+	right: 16px;
+	background: url("/static/aconex-ui/images/basics/icons/icons/chevronDown.svg");
+	height: 20px;
+	width: 20px;
+}
+
 
 .styleguide-tocAnchor {
 	display: none;
