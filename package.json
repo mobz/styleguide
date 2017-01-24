@@ -15,7 +15,7 @@
     "build": "node build.js",
     "publish:prod": "node publish.js --app sg1",
     "start": "node index.js",
-    "start:debug": "nodemon --ext js,handlebars --inspect",
+    "start:debug": "nodemon --ext js,handlebars --inspect=9229",
     "test": "npm run test:lint:js",
     "test:lint:js": "eslint \"services/*.js\" \"routes/*.js\" --cache"
   },
@@ -31,13 +31,13 @@
     "get-installed-path": "1.0.x",
     "markdown-it": "7.0.x",
     "markdown-it-toc-and-anchor": "4.1.x",
-    "morgan": "1.7.x",
-    "nodemon": "1.10.x"
+    "morgan": "1.7.x"
   },
   "devDependencies": {
     "bluebird": "3.4.x",
     "eslint": "3.4.x",
     "eslint-config-aconex": "1.0.x",
-    "fs-extra": "0.30.x"
+    "fs-extra": "0.30.x",
+    "nodemon": "1.11.x"
   }
 }
