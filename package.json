@@ -10,8 +10,10 @@
     "url": "ssh://git@git.cloudengr.aconex.com/ui/styleguide.git"
   },
   "main": "index.js",
+  "bin": {
+    "styleguide-publish": "publish.js"
+  },
   "scripts": {
-    "publish:prod": "node publish.js --app sg1",
     "test": "npm run test:lint:js",
     "test:lint:js": "eslint \"index.js\" \"publish.js\" \"static/*.js\" \"services/*.js\" \"routes/*.js\" --cache"
   },

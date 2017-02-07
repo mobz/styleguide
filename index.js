@@ -29,7 +29,7 @@ module.exports = {
 			} else {
 				uiLibraryPath( uiLibrary );
 				// eslint-disable-next-line no-console
-				console.log( `STYLEGUIDE: Using ui library '${uiLibrary}' at '${uiLibraryPath()}'.` );
+				console.log( `STYLEGUIDE: Using ui library at '${uiLibraryPath()}'.` );
 			}
 		} );
 
