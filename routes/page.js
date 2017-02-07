@@ -1,24 +1,8 @@
 const findit = require( 'findit2' );
-const fs = require( 'fs' );
-const installPath = require( 'get-installed-path' );
 const path = require( 'path' );
-
 const constants = require( '../constants' );
 const mdParser = require( '../services/markdown-parser' );
 const uiLibraryPath = require( '../services/ui-library-path' );
-
-const UI_LIBRARY = constants.UI_LIBRARY;
-
-fs.stat( UI_LIBRARY, function( err ) {
-	if ( err ) {
-		uiLibraryPath( installPath( UI_LIBRARY, true ) );
-	} else {
-		uiLibraryPath( UI_LIBRARY );
-	}
-
-	// eslint-disable-next-line no-console
-	console.log( `using ui library at ${uiLibraryPath()}` );
-} );
 
 module.exports = function( req, res ) {
 	let finder = findit( uiLibraryPath(), { followSymlinks: true } );
@@ -31,7 +15,7 @@ module.exports = function( req, res ) {
 
 	finder.on( 'file', ( filePath ) => {
 		buildNavigation( filePath );
-		buildContents( filePath );
+		buildContents( filePath, vm );
 	} );
 
 	finder.on( 'end', () => {
@@ -41,8 +25,8 @@ module.exports = function( req, res ) {
 	} );
 
 	function buildNavigation( filePath ) {
-		if ( path.basename( filePath ) === constants.GUIDE_DEFAULT ) {
-			defaultFile = filePath;
+		if ( path.basename( filePath ) === constants.GUIDE_DEFAULT_INDEX ) {
+			// don't include the index on the navigation
 			return;
 		}
 
@@ -63,7 +47,12 @@ module.exports = function( req, res ) {
 		}
 	}
 
-	function buildContents( filePath ) {
+	function buildContents( filePath, vm ) {
+		if ( path.basename( filePath ) === constants.GUIDE_DEFAULT_INDEX ) {
+			defaultFile = filePath;
+			return;
+		}
+
 		if ( !req.params.category || !req.params.id ) return;
 
 		let category = req.params.category;

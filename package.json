@@ -11,24 +11,18 @@
   },
   "main": "index.js",
   "scripts": {
-    "dev": "npm run start:debug | node build.dev.js",
-    "build": "node build.js",
     "publish:prod": "node publish.js --app sg1",
-    "start": "node index.js",
-    "start:debug": "nodemon --ext js,handlebars --inspect=9229",
     "test": "npm run test:lint:js",
-    "test:lint:js": "eslint \"services/*.js\" \"routes/*.js\" --cache"
+    "test:lint:js": "eslint \"index.js\" \"publish.js\" \"static/*.js\" \"services/*.js\" \"routes/*.js\" --cache"
   },
   "engine": {
     "node": ">=6.3"
   },
   "dependencies": {
-    "aconex-ui": "git+ssh://git@git.cloudengr.aconex.com/ui/aconex-ui.git",
     "cheerio": "0.22.x",
     "express": "4.14.x",
     "express-handlebars": "3.0.x",
     "findit2": "2.2.x",
-    "get-installed-path": "1.0.x",
     "markdown-it": "7.0.x",
     "markdown-it-toc-and-anchor": "4.1.x",
     "morgan": "1.7.x"
@@ -37,7 +31,6 @@
     "bluebird": "3.4.x",
     "eslint": "3.4.x",
     "eslint-config-aconex": "1.0.x",
-    "fs-extra": "0.30.x",
-    "nodemon": "1.11.x"
+    "fs-extra": "0.30.x"
   }
 }

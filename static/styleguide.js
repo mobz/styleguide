@@ -1,5 +1,15 @@
 /* eslint-env browser */
 window.styleguide = {
+	resizeIframes: function() {
+		var iframes = document.querySelectorAll( 'iframe' );
+		iframes.forEach( function( iframe ) {
+			iframe.contentWindow.eval(
+				'window.onload = function() {' +
+				'	setTimeout( function() { window.parent.styleguide.onIframeRendered( window ); }, 1 );' +
+				'};'
+			);
+		} );
+	},
 	onIframeRendered: function( targetWin ) {
 		var iframes = document.querySelectorAll( 'iframe' );
 		setTimeout( function() {
@@ -33,3 +43,5 @@ window.styleguide = {
 		} );
 	}
 };
+
+window.styleguide.resizeIframes();
