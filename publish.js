@@ -5,7 +5,6 @@
 const path = require( 'path' );
 const bluebird = require( 'bluebird' );
 const fs = bluebird.promisifyAll( require( 'fs-extra' ) );
-const exec = bluebird.promisify( require( 'child_process' ).exec );
 
 const STYLEGUIDE_DIR = __dirname;
 const PUBLISH_BASE_DIR = '.publish';
@@ -37,28 +36,6 @@ fs.ensureDirAsync( publishDir )
 			filter: file => !/(node_modules|\.git|\.publish)/.test( file )
 		};
 		return fs.copyAsync( uiLib, dest, copyOpts );
-	} )
-	.then( () => {
-		const packageName = 'styleguide';
-		// remove the `styleguide` dependency from package.json so that RHCloud doesn't try to npm
-		// install it. They can't access our Git servers.
-		return fs.readJsonAsync( path.join( publishDir, 'package.json' ) )
-			.then( content => {
-				delete content.dependencies[ packageName ];
-				return fs.writeJsonAsync( path.join( publishDir, 'package.json' ), content );
-			} );
-	} )
-	.then( () => {
-		// copy styleguide files
-		let copyDirs = [ 'constants', 'routes', 'services', 'static', 'views', 'index.js', 'publish.js', 'package.json' ];
-		let dest = path.join( publishDir, 'node_modules/styleguide' );
-		return Promise
-			.all( copyDirs.map( dir => fs.copyAsync( path.join( STYLEGUIDE_DIR, dir ), path.join( dest, dir ) ) ) )
-			.then( () => {
-				// npm install styleguide dependencies
-				console.log( 'STYLEGUIDE: Installing styleguide in', dest );
-				return exec( 'npm install', { cwd: dest } );
-			} );
 	} )
 	.then( () => {
 		// copy styleguide Openshift files

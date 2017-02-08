@@ -7,7 +7,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "ssh://git@git.cloudengr.aconex.com/ui/styleguide.git"
+    "url": "ssh://git@github.com:Aconex/styleguide.git"
   },
   "main": "index.js",
   "bin": {
