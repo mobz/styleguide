@@ -1,69 +1,57 @@
-# Aconex Live Styleguide
+# Aconex Styleguide
 
-## Running the styleguide
+The styleguide is installed as an `npm` dependency of your UI library.
 
-Run the following commands in this project's folder to install the project's dependencies, build the styleguide, and start a web server that serves the styleguide.
+## Starter template
 
-```
-npm install
-npm run build
-npm start
-```
-
-Then browse to [`http://localhost:3080`](http://localhost:3080) in your browser to view the styleguide.
+Use the starter template to get an idea of the basic project setup for configuring and using the styleguide: <https://github.com/Aconex/styleguide-starter>.
 
 ## Working with your UI library
 
-The styleguide requires a UI library. To generate the styleguide's contents, we look for files in your UI library that match a filename format of `example.guide.md`.
-
 1. Install `styleguide` as a dependency in your project.
-```
-npm install styleguide
-```
 
+  ```
+  npm install --save github:Aconex/styleguide
+  ```
 
-For example, if a file exists at `aconex-ui/basics/button/button.guide.md`, a _Button_ link will appear under the _Basics_ category in the styleguide's navigation, and the contents of `button.guide.md` will be rendered when the link is clicked.
+2. Configure the styleguide's options:
 
-## Adding new patterns to aconex-ui
+  - `uiLibrary`: path pointing to your UI library.
+  - `demos`: a function for configuration of custom routes for the styleguide. It will be called with the styleguide's express instance, and `express` itself.
 
-See the contributing guide for aconex-ui: <https://git.cloudengr.aconex.com/ui/aconex-ui/blob/master/CONTRIBUTING.md>
+  At a minimum, the `/demo` route should be configured. For an example configuration, see the [`index.js` from `styleguide-starter`](https://github.com/Aconex/styleguide-starter/blob/master/index.js). In this example, a `/static` route is configured for serving static CSS and JS files and a `/demo` route renders a handlebars template for a given demo file.
 
-## Developing with aconex-ui
+  Then browse to <http://localhost:3080> in your browser to view the styleguide.
 
-By default the styleguide will npm install the latest aconex-ui sourced from [its git repository's master branch](https://git.cloudengr.aconex.com/ui/aconex-ui), however you can bind your styleguide to a local version of aconex-ui using [`npm link`](https://docs.npmjs.com/cli/link).
+3. Create styleguide content.
 
-This will allow you to get live feedback in the styleguide for changes that you make to your local aconex-ui.
+  To generate the styleguide's navigation and pages, it looks for files in your UI library that have filenames ending with `.guide.md`. Each one of these will appear as a navigable item in the styleguide's menu.
 
-To set this up:
+  For example, given the following folder structure:
 
-```
-cd ../aconex-ui
-npm link
-cd ../styleguide
-npm link aconex-ui
-npm run dev
-```
+  ```
+  src
+  |
+  +-- basics
+       |
+       |-- button.guide.md
+       +-- button.demo.html
+  ```
 
-At this point the styleguide will use your development version of aconex-ui instead of the latest master. Your local changes to aconex-ui can be seen by refreshing the styleguide in the browser.
-
-## Contributing
-
-Please see <https://git.cloudengr.aconex.com/ui/styleguide/blob/master/CONTRIBUTING.md>.
+  A _Button_ link will appear under the _Basics_ category in the styleguide's menu, and the contents of `button.guide.md` will be rendered when the link is clicked. Inside `button.guide.md`, you can embed the contents of `button.demo.html` by writing `--$ button.demo $--`.
 
 ## Publishing
 
-```
-mkdir publish
-cd publish
-rhc git-clone sg1
-cd ..
-npm run publish:prod
-cd publish/sg1
-```
+The styleguide exposes an executable `styleguide-publish` to simplify publishing to RHCloud. The simplest way to use this is to add a script to your UI library's `package.json`.
 
-check the commit looks ok
+This example will prepare files from the `src` folder of your UI library for publishing to an RHCloud app named `sg3`. The files will be output to a  `publish` folder, ready for pushing to RHCloud.
 
 ```
-git commit -a -m "message"
-git push origin master
+"scripts": {
+  "publish": "styleguide-publish --app sg3 --ui-library ./src --output ./publish"
+}
 ```
+
+## Contributing
+
+Please see `CONTRIBUTING.md`.
