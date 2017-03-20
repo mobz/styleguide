@@ -1,6 +1,7 @@
 <div class="styleguide-demo">
 	<div class="styleguide-demoTabs">
 		<a data-tab-toggle onclick="styleguide.showTab(this, 'example')" class="active">Example</a>
+		<a class="styleguide-external-link" href="{{iframeSrc}}" target="_new"></a>
 		{{#each tabs}}
 			<a data-tab-toggle onclick="styleguide.showTab(this, '{{id}}')">{{id}}</a>
 		{{/each}}

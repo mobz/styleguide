@@ -286,3 +286,25 @@ pre.styleguide-demoCode.prettyprint {
 	border: none;
 	padding: 0;
 }
+
+.styleguide-demoTabs .styleguide-external-link {
+	display: inline-block;
+	margin: 0 8px 0 -22px;
+	height: 15px;
+	width: 14px;
+	padding: 0;
+	background-image: url(images/external-link-square.svg);
+	background-position: 0px 2px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	opacity: 0;
+}
+
+.styleguide-external-link:hover {
+	opacity: 0.8;
+}
+
+A:hover + .styleguide-external-link {
+	opacity: 0.2;
+}
+
