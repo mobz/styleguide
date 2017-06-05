@@ -1,6 +1,6 @@
 {
   "name": "@aconex/styleguide",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Aconex Core Styleguide",
   "author": "ui@aconex.com",
   "license": "UNLICENSED",
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "npm run test:lint:js",
-    "test:lint:js": "eslint \"index.js\" \"publish.js\" \"static/*.js\" \"services/*.js\" \"routes/*.js\" --cache"
+    "test:lint:js": "eslint \"index.js\" \"publish.js\" \"static/styleguide.js\" \"services/*.js\" \"routes/*.js\" --cache"
   },
   "engine": {
     "node": ">=6.3"
@@ -25,7 +25,8 @@
     "express-handlebars": "3.0.x",
     "markdown-it": "7.0.x",
     "markdown-it-toc-and-anchor": "4.1.x",
-    "morgan": "1.7.x"
+    "morgan": "1.7.x",
+    "read-pkg-up": "^2.0.0"
   },
   "devDependencies": {
     "bluebird": "3.4.x",

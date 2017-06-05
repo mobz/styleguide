@@ -103,15 +103,18 @@ code {
 }
 
 .styleguide-brand,
+.styleguide-package,
 .styleguide-nav {
 	padding-left: 32px;
 	padding-right: 32px;
 }
 
+.styleguide-package,
 .styleguide-nav {
-	margin: 0;
-	padding-top: 24px;
-	padding-bottom: 24px;
+	margin: 24px 0;
+}
+
+.styleguide-nav {
 	list-style: none;
 }
 

@@ -2,7 +2,10 @@
 	<div class="styleguide-sidebar">
 		<div class="styleguide-brand">
 			<img src="/static/aconex-logo.png">
-			<a href="/">{{{nav_title}}}</a>
+			<a href="/">{{{lib_package.styleguide.title}}}</a>
+		</div>
+		<div class="styleguide-package">
+			v{{lib_package.version}}
 		</div>
 		<ul class="styleguide-nav">
 			{{#each menu.sections}}

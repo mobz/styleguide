@@ -3,6 +3,7 @@ const logger = require( 'morgan' );
 const viewEngine = require( 'express-handlebars' );
 const fs = require( 'fs' );
 const path = require( 'path' );
+const readPkgUp = require( 'read-pkg-up' );
 
 const app = express();
 const pageHandler = require( './routes/page' );
@@ -13,10 +14,7 @@ const IP = process.env.NODE_IP || '0.0.0.0';
 
 module.exports = {
 	config: function( options = {} ) {
-		let { uiLibrary, demos, title, nav_title } = options;
-
-		app.locals.title = title || 'Aconex Living Styleguide';
-		app.locals.nav_title = nav_title || 'Aconex Pattern Library';
+		let { uiLibrary, demos } = options;
 
 		if ( !uiLibrary ) {
 			throw new Error( 'STYLEGUIDE: UI library path must be configured.' );
@@ -31,6 +29,9 @@ module.exports = {
 				throw new Error( 'STYLEGUIDE: UI library path not found.' );
 			} else {
 				uiLibraryPath( uiLibrary );
+				readPkgUp().then( result => {
+					app.locals.lib_package = result.pkg;
+				} );
 				// eslint-disable-next-line no-console
 				console.log( `STYLEGUIDE: Using ui library at '${uiLibraryPath()}'.` );
 			}
